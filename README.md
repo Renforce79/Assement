@@ -29,17 +29,19 @@ airflow dags trigger ejecutar_miproyecto
 
 ## Execute API from container
 
-1. Build image
+1. sudo service docker start
+
+2. Build image
 ```bash
 sudo docker build -t parsing-data . 
 ```
 
-2. Create container
+3. Create container
 ```bash
 sudo docker run --name load-parsing-data -p 8080:8080 parsing-data
 ```
 
-3. Check real-time logs
+4. Check real-time logs
 ```bash
 sudo docker logs -f parsing-data
 ```
