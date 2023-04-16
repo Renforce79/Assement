@@ -1,0 +1,27 @@
+version: '3'
+services:
+  webserver:
+    build: .
+    command: webserver
+    environment:
+      - AIRFLOW_WEBSERVER_DAG_DEFAULT_VIEW=graph
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "3000:3000"
+  scheduler:
+    build: .
+    command: scheduler
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+  worker:
+    build: .
+    command: worker
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
