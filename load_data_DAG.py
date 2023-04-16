@@ -14,14 +14,14 @@ dag = DAG(
 # Creating crear_tablas  BashOperator
 crear_tablas = BashOperator(
     task_id='crear_tablas',
-    bash_command=f'python {dag_folder}/create_tables.py',
+    bash_command='python {}/create_tables.py'.format(dag_folder),
     dag=dag
 )
 
 # Creating ejecutar_script  BashOperator
 ejecutar_script = BashOperator(
     task_id='ejecutar_script',
-    bash_command=f'python {dag_folder}/load_data.py',
+    bash_command='python {dag_folder}/load_data.py'.format(dag_folder),
     dag=dag
 )
 
