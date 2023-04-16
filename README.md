@@ -14,14 +14,14 @@ sudo service postgresql start
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 
 pip install apache-airflow
-
+sudo apt install docker-compose
 ```
 
 ## Local Execution
 
 airflow db init
-airflow webserver -p 8080
-airflow scheduler 
+airflow webserver -p 8080 -D
+airflow scheduler -D
 
 # Trigger the Airflow DAG with the specified file path
 airflow dags trigger ejecutar_miproyecto
@@ -29,19 +29,22 @@ airflow dags trigger ejecutar_miproyecto
 
 ## Execute API from container
 
-1. sudo service docker start
+1. Start Docker
+```bash
+sudo service docker start
+```
 
-2. Build image
+2. Initiate Container
+```bash
+sudo docker-compose up -d
+```
+
+3. Build image
 ```bash
 sudo docker build -t parsing-data . 
 ```
 
-3. Create container
+4. Run container
 ```bash
 sudo docker run --name load-parsing-data -p 8080:8080 parsing-data
-```
-
-4. Check real-time logs
-```bash
-sudo docker logs -f parsing-data
 ```
